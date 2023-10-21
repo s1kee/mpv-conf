@@ -2642,8 +2642,8 @@ layouts = function ()
     lo.style = string.format("%s{\\clip(%f,%f,%f,%f)}", osc_styles.vidTitle,
                                 geo.x, geo.y - geo.h, geo.x + geo.w , geo.y)
 	lo.layer = 100
-    lo.alpha[3] = 125
-	lo.alpha[1] = 125
+    lo.alpha[3] = 50
+	lo.alpha[1] = 50
 
     -- Buttons buttons by 60
     lo = add_layout("pl_prev")
