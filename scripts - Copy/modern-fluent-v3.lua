@@ -1271,7 +1271,7 @@ local user_opts = {
     seekbarhandlesize = 0.9,    -- size ratio of the diamond and knob handle
     seekrangealpha = 200,       -- transparency of seekranges
     seekbarkeyframes = true,    -- use keyframes when dragging the seekbar
-	--seekrangestyle = "bar",-- bar, line, slider, inverted or none
+	seekrangestyle = "slider",  -- bar, line, slider, inverted or none
     title = "${media-title}",   -- string compatible with property-expansion
                                 -- to be shown as OSC title
     tooltipborder = 0,          -- border of tooltip in bottom/topbar
@@ -2113,9 +2113,9 @@ function render_elements(master_ass)
             local s_min = element.slider.min.value
             local s_max = element.slider.max.value
 
-            -- draw pos marker = element.slider.seekRangesF()
+            -- draw pos marker 
             local pos = element.slider.posF()
-            local seekRanges
+            local seekRanges = element.slider.seekRangesF()
             local rh = user_opts.seekbarhandlesize * elem_geo.h / 2 -- Handle radius
             local xp
 
@@ -2632,6 +2632,7 @@ layouts = function ()
     lo.slider.gap = 0
     lo.slider.tooltip_style = osc_styles.tooltip
     lo.slider.tooltip_an = 2
+	lo.slider.rtype = user_opts["seekrangestyle"]
 
 
     -- Title  x = 25y = refY - 132, h = 48
@@ -3098,7 +3099,31 @@ function osc_init()
     ne.enabled = (get_track('audio')>0)
     ne.slider.tooltipF = nil
     ne.slider.markerF = nil
-	ne.slider.seekRangesF = nil
+	ne.slider.seekRangesF = function()
+        if user_opts.seekrangestyle == "none" then
+            return nil
+        end
+        local cache_state = state.cache_state
+        if not cache_state then
+            return nil
+        end
+        local duration = mp.get_property_number("duration", nil)
+        if (duration == nil) or duration <= 0 then
+            return nil
+        end
+        local ranges = cache_state["seekable-ranges"]
+        if #ranges == 0 then
+            return nil
+        end
+        local nranges = {}
+        for _, range in pairs(ranges) do
+            nranges[#nranges + 1] = {
+                ["start"] = 100 * range["start"] / duration,
+                ["end"] = 100 * range["end"] / duration,
+            }
+        end
+        return nranges
+    end
     ne.slider.posF =
         function ()
             return state.proc_volume
