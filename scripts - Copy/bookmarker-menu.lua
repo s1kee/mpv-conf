@@ -181,7 +181,7 @@ function typer(s)
   end
   postMessage = postMessage:sub(1,postMessage:len()-1)
 
-  mp.osd_message(preMessage.."\n"..postMessage:sub(1,split)..styleOn.."{\\c&H00FFFF&}{\\b1}|{\\r}"..styleOff..postMessage:sub(split+1), 9999)
+  mp.osd_message(preMessage.."\n"..postMessage:sub(1,split)..styleOn.."{\\c&H7fffc7&}{\\b1}|{\\r}"..styleOff..postMessage:sub(split+1), 9999)
 end
 
 -- // Mover \\ --
@@ -620,7 +620,7 @@ function displayBookmarks()
     local btext = displayName(bookmarks[i]["name"])
     local selection = ""
     if i == currentSlot then
-      selection = "{\\b1}{\\c&H00FFFF&}>"
+      selection = "{\\b1}{\\c&H7fffc7&}>"
       if mode == "move" then btext = "----------------" end
       btext = btext
     end

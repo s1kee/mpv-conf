@@ -5,7 +5,7 @@ from tkinter import messagebox
 # Specify your Trakt.tv API credentials
 client_id = '76a97838e5a04002f019218b1003f69419e5f72b57ba20f2aed9c4636cf83122'
 client_secret = '34cbc718b56e77e79c235287e631ef1fac463375347369e291d79142d8fb1d8b'
-access_token = '0890b28a45bfd29c3b4b8d972acff5ec8d85a26593f2596b24491acc25ea49aa'
+access_token = '682d4503014aa1a04c1e3a3f54f265003830533eb8cbd6d18042c6b015cbdb80'
 
 # Set the API endpoint for retrieving currently watching
 watching_url = f'https://api.trakt.tv/users/me/watching'

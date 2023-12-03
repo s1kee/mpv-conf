@@ -13,6 +13,12 @@ class subselect :
         self.root = Tk()
         frame = self.root
         frame.title("Subtitle Downloader")
+        
+        # Set the initial window position
+        xpos = 185
+        ypos = 485
+        self.root.geometry(f"+{xpos}+{ypos}")
+        
         self.video_title_in = Entry(frame, width=100)
         self.video_title_in.bind("<Return>", self.search_)
         self.video_title_in.insert(0, videotitle)

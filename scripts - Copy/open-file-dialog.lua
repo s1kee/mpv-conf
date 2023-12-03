@@ -22,7 +22,7 @@ function open_file_dialog()
 
 			$ofd = New-Object -TypeName Microsoft.Win32.OpenFileDialog
 			$ofd.Multiselect = $true
-			$ofd.InitialDirectory = "D:\MOVIES & TV\sub-temp"
+			$ofd.InitialDirectory = "C:\Users\Therese\AppData\Roaming\mpv\subs"
 
 			If ($ofd.ShowDialog() -eq $true) {
 				ForEach ($filename in $ofd.FileNames) {
@@ -36,10 +36,8 @@ function open_file_dialog()
 	if was_ontop then mp.set_property_native("ontop", true) end
 	if (res.status ~= 0) then return end
 
-	local first_file = true
 	for filename in string.gmatch(res.stdout, '[^\n]+') do
-		mp.commandv('loadfile', filename, first_file and 'replace' or 'append')
-		first_file = false
+		mp.commandv('sub-add', filename, 'select')
 	end
 end
 

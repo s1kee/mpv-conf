@@ -7,7 +7,7 @@ function callback(success, result, error)
 end
 
 function launch_imdb()
-    mp.osd_message("Finding URL...", 30)
+    mp.osd_message("Searching...", 30)
     local script_dir = debug.getinfo(1).source:match("@?(.*/)")
     local table = {}
     table.name = "subprocess"

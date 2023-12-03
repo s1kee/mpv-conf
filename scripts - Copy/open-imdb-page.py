@@ -1,5 +1,6 @@
 import sys
 sys.path.append('C://Users//Therese//AppData//Local//Programs//Python//Python311//Lib//site-packages')
+sys.path.append('C://Users//Therese//AppData//Local//Programs//Python//Python38//Lib//site-packages')
 import webbrowser
 
 from guessit import guessit
@@ -44,5 +45,7 @@ if __name__ == "__main__":
         url = get_imdb_url(sys.argv[1])
         webbrowser.open_new_tab(url)
     except Exception as e:
-        print("ERROR: {}".format(e))
+        dashboard = 'https://trakt.tv/dashboard'
+        webbrowser.open_new_tab(dashboard)
+        # print("ERROR: {}".format(e))
         sys.exit(1)
